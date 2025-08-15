@@ -13,6 +13,26 @@
   ],
   "main": "./extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Git Identity Switcher",
+      "properties": {
+        "gitIdentitySwitcher.identities": {
+          "type": "array",
+          "description": "List of Git identities used by the extension",
+          "default": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "username": { "type": "string" },
+              "email": { "type": "string" },
+              "id": { "type": "number" }
+            },
+            "required": ["name", "username", "email"]
+          }
+        }
+      }
+    },
     "viewsContainers": {
       "activitybar": [
         {
