@@ -1,0 +1,87 @@
+{
+  "name": "git-identity-switcher",
+  "displayName": "Git Identity Switcher",
+  "publisher": "Wisdom47",
+  "description": "Easily switch between Git user identities for different repositories",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "gitIdentityContainer",
+          "title": "Git Identity",
+          "icon": "$(person)"
+        }
+      ]
+    },
+    "views": {
+      "gitIdentityContainer": [
+        {
+          "id": "gitIdentitySwitcher",
+          "name": "Identities",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "id": "currentIdentityView",
+          "name": "Current Identity"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "gitIdentitySwitcher.switchIdentity",
+        "title": "Switch Git Identity",
+        "icon": "$(person)"
+      },
+      {
+        "command": "gitIdentitySwitcher.addIdentity",
+        "title": "Add Identity",
+        "icon": "$(add)"
+      },
+      {
+        "command": "gitIdentitySwitcher.refreshView",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "gitIdentitySwitcher.deleteIdentity",
+        "title": "Delete Identity",
+        "icon": "$(trash)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "gitIdentitySwitcher.addIdentity",
+          "when": "view == gitIdentitySwitcher",
+          "group": "navigation"
+        },
+        {
+          "command": "gitIdentitySwitcher.refreshView",
+          "when": "view == gitIdentitySwitcher",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "gitIdentitySwitcher.switchIdentity",
+          "when": "view == gitIdentitySwitcher && viewItem == identity",
+          "group": "inline"
+        },
+        {
+          "command": "gitIdentitySwitcher.deleteIdentity",
+          "when": "view == gitIdentitySwitcher && viewItem == identity",
+          "group": "inline"
+        }
+      ]
+    }
+  }
+}
