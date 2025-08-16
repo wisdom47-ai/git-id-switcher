@@ -9,7 +9,13 @@
   },
   "categories": ["Other"],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onCommand:gitIdentitySwitcher.addIdentity",
+    "onCommand:gitIdentitySwitcher.switchIdentity",
+    "onCommand:gitIdentitySwitcher.refreshView",
+    "onCommand:gitIdentitySwitcher.deleteIdentity",
+    "onCommand:gitIdentitySwitcher.sshWizard",
+    "onCommand:gitIdentitySwitcher.copyPublicKey"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -75,6 +81,21 @@
         "command": "gitIdentitySwitcher.deleteIdentity",
         "title": "Delete Identity",
         "icon": "$(trash)"
+      },
+      {
+        "command": "gitIdentitySwitcher.deleteIdentityFromPalette",
+        "title": "Delete Identity (Command Palette)",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "gitIdentitySwitcher.sshWizard",
+        "title": "SSH Setup Wizard",
+        "icon": "$(key)"
+      },
+      {
+        "command": "gitIdentitySwitcher.copyPublicKey",
+        "title": "Copy SSH Public Key",
+        "icon": "$(copy)"
       }
     ],
     "menus": {
@@ -88,17 +109,27 @@
           "command": "gitIdentitySwitcher.refreshView",
           "when": "view == gitIdentitySwitcher",
           "group": "navigation"
+        },
+        {
+          "command": "gitIdentitySwitcher.sshWizard",
+          "when": "view == gitIdentitySwitcher",
+          "group": "navigation"
         }
       ],
       "view/item/context": [
         {
           "command": "gitIdentitySwitcher.switchIdentity",
-          "when": "view == gitIdentitySwitcher && viewItem == identity",
+          "when": "view == gitIdentitySwitcher",
           "group": "inline"
         },
         {
           "command": "gitIdentitySwitcher.deleteIdentity",
-          "when": "view == gitIdentitySwitcher && viewItem == identity",
+          "when": "view == gitIdentitySwitcher",
+          "group": "inline"
+        },
+        {
+          "command": "gitIdentitySwitcher.copyPublicKey",
+          "when": "view == gitIdentitySwitcher",
           "group": "inline"
         }
       ]
